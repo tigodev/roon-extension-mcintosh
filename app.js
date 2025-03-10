@@ -1,11 +1,11 @@
 "use strict";
 
 var McIntosh = require("node-mcintosh"),
-RoonApi = require("node-roon-api"),
-RoonApiSettings = require('node-roon-api-settings'),
-RoonApiStatus = require('node-roon-api-status'),
-RoonApiVolumeControl = require('node-roon-api-volume-control'),
-RoonApiSourceControl = require('node-roon-api-source-control');
+    RoonApi = require("node-roon-api"),
+    RoonApiSettings = require('node-roon-api-settings'),
+    RoonApiStatus = require('node-roon-api-status'),
+    RoonApiVolumeControl = require('node-roon-api-volume-control'),
+    RoonApiSourceControl = require('node-roon-api-source-control');
 
 var roon = new RoonApi({
     extension_id: 'com.stefan747.roon.mcintosh',
@@ -48,10 +48,27 @@ function makelayout(settings) {
     });
 
     l.layout.push({
-        type: "integer",
+        type: "dropdown",
         title: "Source for Convenience Switch",
-        min: 1,
-        max: 20,
+        values: [
+            { value: "1",  title: "BAL 1"         },
+            { value: "2",  title: "BAL 2"         },
+            { value: "3",  title: "UNBAL 1"       },
+            { value: "4",  title: "UNBAL 2"       },
+            { value: "5",  title: "UNBAL 3"       },
+            { value: "6",  title: "UNBAL 4"       },
+            { value: "7",  title: "UNBAL 5"       },
+            { value: "8",  title: "UNBAL 6"       },
+            { value: "9",  title: "MM PHONO"      },
+            { value: "10",  title: "MC PHONO"     },
+            { value: "11",  title: "COAX 1"       },
+            { value: "12",  title: "COAX 2"       },
+            { value: "13",  title: "OPTI 1"       },
+            { value: "14",  title: "OPTI 2"       },
+            { value: "15", title: "USB"           },
+            { value: "16", title: "MCT"           },
+            { value: "17", title: "HDMI (ARC)"    }
+            ],
         setting: "setsource",
     });
 
@@ -59,7 +76,7 @@ function makelayout(settings) {
         type: "integer",
         title: "Initial Volume",
         min: 0,
-        max: 100,
+        max: 60,
         setting: "initialvolume",
     });
 
@@ -162,10 +179,10 @@ function ev_connected(status) {
 
     mcintosh.volume_control = svc_volume_control.new_device({
         state: {
-            display_name: "McIntosh",
+            display_name: "McIntosh Volume",
             volume_type: "number",
             volume_min: 0,
-            volume_max: 100,
+            volume_max: 60,
             volume_value: control.properties.volume > 0 ? control.properties.volume : 10,
             volume_step: 1.0,
             is_muted: control.properties.source == "Muted"
@@ -190,7 +207,7 @@ function ev_connected(status) {
 
     mcintosh.source_control = svc_source_control.new_device({
         state: {
-            display_name: "McIntosh",
+            display_name: "McIntosh Source",
             supports_standby: true,
             status: control.properties.source == "Standby" ? "standby" : (control.properties.source == mysettings.setsource ? "selected" : "deselected")
         },
