@@ -4,15 +4,15 @@ This extension connects to your McIntosh device (Preamplifier, Integrated Amplif
 
 ---------------------
 
-This extension was tested on Mcintosh C47 Preamplifier.
+This extension was tested on Mcintosh MA9500 Integrated Amplifier. The maximum volume has been limited to 60% to avoid accidents.
 
 ---------------------
 
 This is my personal setup, but any Linux based device can be setup the same way:
 
     SoTM SMS-200
-	-> USB audio -> USB cable -> McIntosh C47 DAC
-	-> USB Serial port adapter -> RS232 Serial cable -> McIntosh C47
+	-> USB audio -> USB cable -> McIntosh MA9500 DAC
+	-> USB Serial port adapter -> RS232 Serial cable -> McIntosh MA9500
 
     Setup parameters (configured via Roon):
 	- Serial Port: USB port on which the RS232 cable is used
